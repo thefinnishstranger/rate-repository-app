@@ -3,6 +3,7 @@ import Constants from 'expo-constants';
 import theme from '../theme';
 import { ScrollView } from 'react-native';
 import { Link } from 'react-router-native';
+import useSignOut from '../utils/useSignOut';
 
 const styles = StyleSheet.create({
   container: {
@@ -32,6 +33,9 @@ const AppBarTab = ({ title }) => {
 };
 
 const AppBar = () => {
+  const { signOut, data } = useSignOut()
+  console.log('data', data);
+
   return (
     <View style={styles.container}>
       <AppBarTab />
@@ -46,6 +50,15 @@ const AppBar = () => {
             <Text style={styles.tabText}>Sign In</Text>
         </Link>
       </View>
+      {data && data.me ? (
+        <View>
+        <Link to='/'>
+            <Text style={styles.tabText} onPress={signOut}>Sign Out</Text>
+        </Link>
+      </View>
+      ) : (
+        <></>
+      )}
       </ScrollView>
     </View>
   );
