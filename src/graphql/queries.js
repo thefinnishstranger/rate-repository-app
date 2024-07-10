@@ -37,3 +37,63 @@ export const ME = gql `
   }
 }
 `
+
+export const REPOSITORY = gql `
+  query Repository($id: ID!) {
+    repository(id: $id) {
+      id
+      fullName
+      description
+      language
+      forksCount
+      stargazersCount
+      ratingAverage
+      reviewCount
+      ownerAvatarUrl
+      url
+      reviews {
+        edges {
+          node {
+            id
+            text
+            rating
+            createdAt
+            user {
+              id
+              username
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+export const CREATE_REVIEW = gql`
+  mutation CreateReview(
+    $repositoryOwnerName: String!
+    $repositoryName: String!
+    $rating: Int!
+    $review: String
+  ) {
+    createReview(
+      review: {
+        ownerName: $repositoryOwnerName
+        repositoryName: $repositoryName
+        rating: $rating
+        text: $review
+      }
+    ) {
+      repositoryId
+    }
+  }
+`;
+
+export const SIGNUP = gql`
+  mutation CreateUser($username: String!, $password: String!) {
+    createUser(user: { username: $username, password: $password }) {
+      username
+      id
+    }
+  }
+`;

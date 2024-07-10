@@ -50,6 +50,16 @@ const AppBar = () => {
             <Text style={styles.tabText}>Sign In</Text>
         </Link>
       </View>
+      <View>
+        <Link to='/signup'>
+            <Text style={styles.tabText}>Sign Up</Text>
+        </Link>
+      </View>
+      <View>
+        <Link to='/create-review'>
+            <Text style={styles.tabText}>Create Review</Text>
+        </Link>
+      </View>
       {data && data.me ? (
         <View>
         <Link to='/'>
